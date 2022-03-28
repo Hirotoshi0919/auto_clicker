@@ -16,22 +16,23 @@ time.sleep(3)
 # 無限クリック
 while True:
 
+    #施設の要素を検索
     product = driver.find_elements(By.CSS_SELECTOR, ".product.unlocked.enabled")
-    upgrade = driver.find_elements(By.CSS_SELECTOR, ".crate.upgrade.enabled")
 
     if len(product) > 0:
-
+        # for each文にて要素がある間繰り返す
         for product_element in product:
             count_cookie = int(driver.find_element(By.ID, "cookies").text.split(" ")[0].replace(",", ""))
             product_cost = int(product_element.text.split("\n")[1].replace(",", ""))
-
+            # 施設を買える枚数クッキーがある場合は購入
             if count_cookie >= product_cost:
                 product_element.click()
-
+                # ログ表示
                 print("所持しているクッキー：" + str(count_cookie) + "枚")
                 print(product_element.text.split("\n")[0] + "（コスト：" + str(product_cost) + ")をクリックしました")
                 print("-" * 40)
 
     else:
+        # クッキーを連打する
         cookie = driver.find_element(By.ID, "bigCookie")
         cookie.click()

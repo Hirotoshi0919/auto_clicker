@@ -19,6 +19,10 @@ while True:
     #施設の要素を検索
     product = driver.find_elements(By.CSS_SELECTOR, ".product.unlocked.enabled")
 
+    # NGパターン
+    # product = driver.find_elements(By.CLASS_NAME, "product unlocked enabled")
+
+
     if len(product) > 0:
         # for each文にて要素がある間繰り返す
         for product_element in product:
